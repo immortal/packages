@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if [ systemctl > /dev/null 2>&1 ]; then
-    mv /tmp/immortaldir.service /etc/systemd/system/
+if hash systemctl 2>/dev/null; then
+    mv /tmp/immortal/immortaldir.service /etc/systemd/system/
     systemctl enable immortaldir.service
 else
-    mv /tmp/immortaldir /etc/init.d/
+    mv /tmp/immortal/immortaldir /etc/init.d/
 fi
