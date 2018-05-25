@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -d /etc/systemd/system ]; then
+if [ systemctl > /dev/null 2>&1 ]; then
     mv /tmp/immortaldir.service /etc/systemd/system/
     systemctl enable immortaldir.service
 else
