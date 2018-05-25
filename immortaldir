@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# immortaldir start-stop-daemon
+set -e
+
+NAME=immortaldir
+PIDFILE=/var/run/$NAME.pid
+DAEMON=/usr/bin/immortaldir
+DAEMON_OPTS="/etc/immortal"
+
+export PATH="${PATH:+$PATH:}/usr/sbin:/sbin"
+
+case "$1" in
+  start)
+        echo -n "Starting daemon: "$NAME
+	start-stop-daemon --start \
+    --quiet \
+    --oknodo \
+    --make-pidfile \
+    --pidfile $PIDFILE \
+    --background \
+    --startas /bin/sh \
+    -- -c "exec $DAEMON $DAEMON_OPTS 2>&1 | logger -t immortaldir"
+    echo "."
+	;;
+  stop)
+        echo -n "Stopping daemon: "$NAME
+        pkill $NAME
+        echo "."
+	;;
+  *)
+	echo "Usage: "$1" {start|stop}"
+	exit 1
+esac
+
+exit 0
