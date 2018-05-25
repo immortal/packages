@@ -5,4 +5,5 @@ if hash systemctl 2>/dev/null; then
     systemctl enable immortaldir.service
 else
     mv /tmp/immortal/immortaldir /etc/init.d/
+    chmod +x /etc/init.d/immortaldir
 fi
