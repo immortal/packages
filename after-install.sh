@@ -7,3 +7,5 @@ else
     mv /tmp/immortal/immortaldir /etc/init.d/
     chmod +x /etc/init.d/immortaldir
 fi
+
+rm -rf /tmp/immortal
